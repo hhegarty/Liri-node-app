@@ -1,16 +1,18 @@
-// Code to read and set environment variables with dotenv package //
-
 require("dotenv").config();
 
 // Code to required to import the 'keys.js' file & store in a variable //
 
-var keys = require("./keys.js");
+var keys = require("./keys");
 var axios = require("axios");
 var moment = require("moment");
 var Spotify = require("node-spotify-api");
 var fs = require("fs");
 
-var spotify = new Spotify(keys.spotify);
+var spotify = new Spotify({
+    id: keys.spotify.id,
+  secret: keys.spotify.secret,
+});
+
 
 // Create the default song when a user has no input //
 
@@ -23,7 +25,7 @@ var defaultmovie = "Mr. Nobody"
 // Command line arguments //
 
 var action = process.argv[2];
-var value = process.arg[3];
+var value = process.argv[3];
 
 // If/Else or switch statements // 
 
@@ -59,7 +61,7 @@ switch (action) {
 // Call on Axios to gather data from bandsintown API and log the response //  
 
 function getBands(artists) {
-    axios.get("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
+    axios.get("https://rest.bandsintown.com/artists/" + artists + "/events?app_id=codingbootcamp")
         .then(function (response) {
             console.log("Name of venue:", response.data[0].venue.name);
             console.log("Venue location:", response.data[0].venue.city);
@@ -78,7 +80,7 @@ function getBands(artists) {
 
 function getSongs(songName) {
     if (songName === "") {
-        songName = "I saw the Sign";
+        songName = "The Sign";
     }
 
     spotify.search({ type: 'track', query: songName }, function (err, data) {
@@ -101,17 +103,17 @@ function getSongs(songName) {
 // Call on Axios to gather data from OMDB API and log results //
 
 function getMovies(movieName){
-    axios.get("http://www.omdbapi.com/?apikey=trilogy=" + movieName)
-    .then (function(data){
+    axios.get("https://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy")
+    .then (function(response){
         var results = `
-      Title of the movie: ${data.data.Title}
-      Year the movie came out: ${data.data.Year}
-      IMDB Rating of the movie: ${data.data.Rated}
-      Rotten Tomatoes Rating of the movie: ${data.data.Ratings[1].Value}
-      Country where the movie was produced: ${data.data.Country}
-      Language of the movie: ${data.data.Language}
-      Plot of the movie: ${data.data.Plot}
-      Actors in the movie: ${data.data.Actors}`;
+      Title of the movie: ${response.data.Title}
+      Year the movie came out: ${response.data.Year}
+      IMDB Rating of the movie: ${response.data.Rated}
+      Rotten Tomatoes Rating of the movie: ${response.data.Ratings[1].Value}
+      Country where the movie was produced: ${response.data.Country}
+      Language of the movie: ${response.data.Language}
+      Plot of the movie: ${response.data.Plot}
+      Actors in the movie: ${response.data.Actors}`;
       console.log(results)
     })
 
@@ -126,6 +128,31 @@ function getMovies(movieName){
         console.log("If you haven't watched Mr.Nobody, then you should:http://www.imdb.com/title/tt0485947/");
         console.log("It's on Netflix!");
     };
+}
+
+// 
+
+function doWhatItSays(){
+    fs.readFile("random.txt", "utf8", function(err, data){
+        data = data.split(",");
+        var action = data[0]
+        var value = data[1]
+
+        switch(action){
+            case "concert-this":
+                getBands(value)
+                break;
+            case "spotify-this-song":
+                getSongs(value)
+                break;
+            case "movie-this":
+                getMovies(value)
+                break;
+                default:
+                break;
+        }
+    
+    });
 }
 
 
