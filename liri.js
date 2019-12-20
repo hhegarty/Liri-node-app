@@ -15,8 +15,9 @@ var spotify = new Spotify({
 
 
 // Create the default song when a user has no input //
+// Had to be more specific because Harry Styles populated //
 
-var defaultsong = "The Sign"
+var defaultsong = "The Sign Ace of Base"
 
 //Creat the default movie when a user has no input //
 
@@ -80,7 +81,7 @@ function getBands(artists) {
 
 function getSongs(songName) {
     if (songName === "") {
-        songName = "The Sign";
+        songName = "The Sign Ace of Base";
     }
 
     spotify.search({ type: 'track', query: songName }, function (err, data) {
