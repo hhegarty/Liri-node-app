@@ -25,23 +25,24 @@ Use Node JS to create a LIRI bot, like Iphone's SIRI, but takes commands through
 * DotEnv (https://www.npmjs.com/package/dotenv)
 
 **What Each Command Does**
+<br>
 *LIRI* searches *Bands In Town* for concerts, *Spotify* for songs, and *OMDB* for movies.
 
-1. node liri.js concert-this "artist/band name here"
- - Searches the Bands in Town Artist Event API for an artist and renders the following information about them in the terminal/bash window
+1. **node liri.js concert-this "artist/band name here"**
+Searches the Bands in Town Artist Event API for an artist and renders the following information about them in the terminal/bash window
  * Name of venue
  * Venue location
  * Date of event
 
- 2. node liri.js spotify-this-song "song name here"
- - Displays the following information about the selected song in the terminal/bash window
+ 2. **node liri.js spotify-this-song "song name here"**
+ Displays the following information about the selected song in the terminal/bash window
  * Artist
  * Preview Link
  * Album name
- - if no song is provided, the program defaults to "The Sign" by Ace of Base
+if no song is provided, the program defaults to "The Sign" by Ace of Base
 
- 3. node liri.js movie-this "movie name here"  
- - Displays the following information about the selected song in your terminal/bash window
+ 3. **node liri.js movie-this "movie name here"**
+ Displays the following information about the selected song in your terminal/bash window
  * Title
   * Year movie was released
   * IMDB Rating
@@ -50,9 +51,9 @@ Use Node JS to create a LIRI bot, like Iphone's SIRI, but takes commands through
   * Language(s)
   * Plot of the movie
   * Actors in the movie
-  - If the user does not enter a movie selection, the program outputs data for the movie 'Mr. Nobody.'
+If the user does not enter a movie selection, the program outputs data for the movie 'Mr. Nobody.'
  
- 4. node liri.js do-what-it-says
+ 4. **node liri.js do-what-it-says**
  * Runs spotify-this-song for | "I Want it That Way"
 
 
