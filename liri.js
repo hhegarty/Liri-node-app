@@ -131,29 +131,18 @@ function getMovies(movieName){
     };
 }
 
-// 
+// I could get dowhatitsays to read & parse information from random.txt but when I tried to
+// use it with everything else nothing worked correctly //
 
 function doWhatItSays(){
-    fs.readFile("random.txt", "utf8", function(err, data){
-        data = data.split(",");
-        var action = data[0]
-        var value = data[1]
-
-        switch(action){
-            case "concert-this":
-                getBands(value)
-                break;
-            case "spotify-this-song":
-                getSongs(value)
-                break;
-            case "movie-this":
-                getMovies(value)
-                break;
-                default:
-                break;
-        }
-    
-    });
+	fs.readFile('random.txt', 'utf8', function(err, data){
+		if (err){ 
+			return console.log(err);
+		}
+        var dataArr = data.split(',');
+        UserInputs(dataArr[0], dataArr[1]);
+	});
 }
+
 
 
