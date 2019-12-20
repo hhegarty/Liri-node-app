@@ -39,6 +39,7 @@ Searches the Bands in Town Artist Event API for an artist and renders the follow
  * Artist
  * Preview Link
  * Album name
+ <br>
 if no song is provided, the program defaults to "The Sign" by Ace of Base
 
  3. **node liri.js movie-this "movie name here"**
@@ -51,6 +52,7 @@ if no song is provided, the program defaults to "The Sign" by Ace of Base
   * Language(s)
   * Plot of the movie
   * Actors in the movie
+  <br>
 If the user does not enter a movie selection, the program outputs data for the movie 'Mr. Nobody.'
  
  4. **node liri.js do-what-it-says**
